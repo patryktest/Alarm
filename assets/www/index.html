@@ -9,7 +9,7 @@
 <body>
 
 <span id="status">Connecting...</span>
-
+<button onclick="save()">save</button>
 
  <script type="text/javascript" src="cordova.js"></script>
  <script src="./js/jquery.min.js"></script>
@@ -23,13 +23,6 @@ var back = false;
 	
 	document.addEventListener("deviceready", onDeviceReady, true);
 });
-
-function hide(){
-	back = true;
-}
-function show(){
-	back = false;
-}
 
 function onDeviceReady()
 {
@@ -49,15 +42,22 @@ function init(){
 }
 
 function onSuccess(acceleration) {
-    content.text('Acceleration X: ' + acceleration.x + '\n' +
+	if(acceleration.y>-1 && acceleration.y<1 && acceleration.x>-1 && acceleration.x<1)
+		content.text('pohlo sa mobilom');
+	/*content.text('Acceleration X: ' + acceleration.x + '\n' +
           'Acceleration Y: ' + acceleration.y + '\n' +
           'Acceleration Z: ' + acceleration.z + '\n' +
           'Timestamp: '      + acceleration.timestamp + '\n');
-	};
+	*/
+};
 
-	function onError() {
-		alert('onError!');
-	};
+function onError() {
+	alert('onError!');
+};
+
+function save(){
+	alert('saveing');
+}
 
 
 </script>
