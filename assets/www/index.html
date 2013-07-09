@@ -35,9 +35,9 @@ function onDeviceReady()
 }
 function init(){
 	content = $('#status');
-	status = $('#status2');
+	content2 = $('#status2');
 	saveData = $('#saveData');
-	status.text(' \n porovnavanie');
+	content2.text(' \n porovnavanie');
 	content.text("");
 	content.text("Pripojene");
 
@@ -55,11 +55,11 @@ function onSuccess(acceleration) {
 	x=acceleration.x;
 	y=acceleration.y;
 	z=acceleration.z;
-	status.text(' \n porovnavanie');
+	content2.text(' \n porovnavanie');
 	if(x+1>xs && x-1<xs && y+1>ys && y-1<ys)
-		status.text('nelezi');
+		content2.text('nelezi');
 	else
-		status.text('lezi');
+		content2.text('lezi');
 	
 };
 
