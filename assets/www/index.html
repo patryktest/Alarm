@@ -54,6 +54,7 @@ function onSuccess(acceleration) {
 	x=acceleration.x;
 	y=acceleration.y;
 	z=acceleration.z;
+	status.text(' \n porovnavanie');
 	if(x+1>xs && x-1<xs && y+1>ys && y-1<ys)
 		status.text('nelezi');
 	else
@@ -69,7 +70,7 @@ function save(){
 	xs=x;
 	ys=y;
 	zs=z;
-	saveData.text('save data x:'+xs+' y: '+ys+' z: '+zs);
+	saveData.text(' \n save data x:'+xs+'\n y: '+ys+'\n z: '+zs);
 	
 }
 
