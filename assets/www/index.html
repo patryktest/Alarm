@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>WebSockets - Simple chat</title>
+
+
+</head>
+<body>
+
+<span id="status">Connecting...</span>
+
+
+ <script type="text/javascript" src="cordova.js"></script>
+ <script src="./js/jquery.min.js"></script>
+<script type="text/javascript">
+/*function onLoad(){
+	//document.addEventListener("deviceready", onDeviceReady, true);
+	connect();
+};*/
+var back = false;
+ $(function () {
+	
+	document.addEventListener("deviceready", onDeviceReady, true);
+});
+
+function hide(){
+	back = true;
+}
+function show(){
+	back = false;
+}
+
+function onDeviceReady()
+{
+	init();
+
+
+}
+function init(){
+	content = $('#status');
+	content.text("");
+	content.text("Pripojene");
+}
+
+
+</script>
+</body>
+</html>
