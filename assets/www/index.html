@@ -9,6 +9,8 @@
 <body>
 
 <span id="status">Connecting...</span>
+<span id="status2">Connecting...</span>
+<span id="saveData"></span>
 <button onclick="save()">save</button>
 
  <script type="text/javascript" src="cordova.js"></script>
@@ -19,6 +21,7 @@
 	connect();
 };*/
 var back = false;
+var x,y,z,xs,ys,zs = 0;
  $(function () {
 	
 	document.addEventListener("deviceready", onDeviceReady, true);
@@ -32,6 +35,8 @@ function onDeviceReady()
 }
 function init(){
 	content = $('#status');
+	status = $('#status2');
+	saveData = $('#saveData');
 	content.text("");
 	content.text("Pripojene");
 
@@ -42,13 +47,18 @@ function init(){
 }
 
 function onSuccess(acceleration) {
-	if(acceleration.y>-1 && acceleration.y<1 && acceleration.x>-1 && acceleration.x<1)
-		content.text('pohlo sa mobilom');
-	/*content.text('Acceleration X: ' + acceleration.x + '\n' +
+	content.text('Acceleration X: ' + acceleration.x + '\n' +
           'Acceleration Y: ' + acceleration.y + '\n' +
           'Acceleration Z: ' + acceleration.z + '\n' +
           'Timestamp: '      + acceleration.timestamp + '\n');
-	*/
+	x=acceleration.x;
+	y=acceleration.y;
+	z=acceleration.z;
+	if(x+1>xs && x-1<xs && y+1>ys && y-1<ys)
+		status.text('nelezi');
+	else
+		status.text('lezi');
+	
 };
 
 function onError() {
@@ -56,7 +66,11 @@ function onError() {
 };
 
 function save(){
-	alert('saveing');
+	xs=x;
+	ys=y;
+	zs=z;
+	saveData.text('save data x:'+xs+' y: '+ys+' z: '+zs);
+	
 }
 
 
