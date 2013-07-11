@@ -6,7 +6,13 @@
 
 
 </head>
-<body>
+<style>
+.blink {
+    animation:fade 3000ms infinite;
+    -webkit-animation:fade 3000ms infinite;
+}
+</style>
+<body style="color:blue;">
 
 <span id="status">Connecting...</span>
 <span id="status2">Connecting...</span>
@@ -56,8 +62,12 @@ function onSuccess(acceleration) {
 	y=acceleration.y;
 	z=acceleration.z;
 	content2.text(' \n porovnavanie');
-	if(x>xs+1 || x < xs-1)
-		content2.text('nelezi');
+	if((x>xs+1 || x < xs-1) && (y>ys+1 || y<ys-1))
+		{
+			content2.text('nelezi');
+			$('body').addClass('blink');
+		}
+		
 	else
 		content2.text('lezi asi');
 	
