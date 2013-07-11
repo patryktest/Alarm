@@ -41,7 +41,7 @@ function init(){
 	content.text("");
 	content.text("Pripojene");
 
-	var options = { frequency: 3000 };  // Update every 3 seconds
+	var options = { frequency: 1000 };  // Update every 3 seconds
 
 	var watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
 
@@ -56,7 +56,7 @@ function onSuccess(acceleration) {
 	y=acceleration.y;
 	z=acceleration.z;
 	content2.text(' \n porovnavanie');
-	if(x+1>xs)
+	if(x>xs)
 		content2.text('nelezi');
 	else
 		content2.text('lezi asi');
