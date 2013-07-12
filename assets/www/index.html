@@ -1,91 +1,122 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>WebSockets - Simple chat</title>
-
-
+	<meta charset="utf-8">
+	<title>WebSockets - Simple chat</title>
 </head>
-<style>
-.blink {
-    animation:fade 3000ms infinite;
-    -webkit-animation:fade 3000ms infinite;
-}
+	<style>
+	.blink {
+		animation:fade 3000ms infinite;
+		-webkit-animation:fade 3000ms infinite;
+	}
 </style>
+
+<script type="text/javascript" src="cordova.js"></script>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/jquery.mobile-1.3.1.js"></script>
+	<script type="text/javascript">
+		/*function onLoad(){
+			//document.addEventListener("deviceready", onDeviceReady, true);
+			connect();
+		};*/
+		var back = false;
+		var x,y,z,xs,ys,zs = 0;
+		 $(function () {
+			
+			document.addEventListener("deviceready", onDeviceReady, true);
+		});
+
+		function onDeviceReady()
+		{
+			init();
+
+
+		}
+		function init(){
+			content = $('#status');
+			content2 = $('#status2');
+			saveData = $('#saveData');
+			content2.text(' \n porovnavanie');
+			content.text("");
+			content.text("Pripojene");
+
+			var options = { frequency: 1000 };  // Update every 3 seconds
+
+			var watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
+
+		}
+
+		function onSuccess(acceleration) {
+			content.text('Acceleration X: ' + acceleration.x + '\n' +
+				  'Acceleration Y: ' + acceleration.y + '\n' +
+				  'Acceleration Z: ' + acceleration.z + '\n' +
+				  'Timestamp: '      + acceleration.timestamp + '\n');
+			x=acceleration.x;
+			y=acceleration.y;
+			z=acceleration.z;
+			content2.text(' \n porovnavanie');
+			if((x>xs+1 || x < xs-1) && (y>ys+1 || y<ys-1))
+				{
+					content2.text('nelezi');
+					$('body').addClass('blink');
+				}
+				
+			else
+				content2.text('lezi asi');
+			
+		};
+
+		function onError() {
+			alert('onError!');
+		};
+
+		function save(){
+			xs=x;
+			ys=y;
+			zs=z;
+			saveData.text(' \n save data x:'+xs+'\n y: '+ys+'\n z: '+zs);
+			
+		}
+
+
+	</script>
+	
 <body style="color:blue;">
 
-<span id="status">Connecting...</span>
-<span id="status2">Connecting...</span>
-<span id="saveData"></span>
-<button onclick="save()">save</button>
-
- <script type="text/javascript" src="cordova.js"></script>
- <script src="./js/jquery.min.js"></script>
-<script type="text/javascript">
-/*function onLoad(){
-	//document.addEventListener("deviceready", onDeviceReady, true);
-	connect();
-};*/
-var back = false;
-var x,y,z,xs,ys,zs = 0;
- $(function () {
-	
-	document.addEventListener("deviceready", onDeviceReady, true);
-});
-
-function onDeviceReady()
-{
-	init();
-
-
-}
-function init(){
-	content = $('#status');
-	content2 = $('#status2');
-	saveData = $('#saveData');
-	content2.text(' \n porovnavanie');
-	content.text("");
-	content.text("Pripojene");
-
-	var options = { frequency: 1000 };  // Update every 3 seconds
-
-	var watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
-
-}
-
-function onSuccess(acceleration) {
-	content.text('Acceleration X: ' + acceleration.x + '\n' +
-          'Acceleration Y: ' + acceleration.y + '\n' +
-          'Acceleration Z: ' + acceleration.z + '\n' +
-          'Timestamp: '      + acceleration.timestamp + '\n');
-	x=acceleration.x;
-	y=acceleration.y;
-	z=acceleration.z;
-	content2.text(' \n porovnavanie');
-	if((x>xs+1 || x < xs-1) && (y>ys+1 || y<ys-1))
-		{
-			content2.text('nelezi');
-			$('body').addClass('blink');
-		}
+	<div data-role="page" id='home'>
+		<div data-role='header'>
+			<h1>Home page</h1>
+		</div>
 		
-	else
-		content2.text('lezi asi');
+		<div data-role='content'>
+			<span id="status">Connecting...</span>
+			<span id="status2">Connecting...</span>
+			<span id="saveData"></span>
+			<button onclick="save()">save</button>
+			<a href="#second">NEXT</a>
+		</div>
+		
+		<div data-role='footer'>
+		<h4>Footer</h4>
+		</div>
+		
+	</div>
 	
-};
-
-function onError() {
-	alert('onError!');
-};
-
-function save(){
-	xs=x;
-	ys=y;
-	zs=z;
-	saveData.text(' \n save data x:'+xs+'\n y: '+ys+'\n z: '+zs);
+	<div data-role="page" id='second'>
+		<div data-role='header'>
+			<h1>Page numero uno</h1>
+		</div>
+		
+		<div data-role='content'>
+			<a href="#home">BACK</a>
+		</div>
+		
+		<div data-role='footer'>
+		<h4>Footer</h4>
+		</div>
+		
+	</div>
 	
-}
-
-
-</script>
+	
 </body>
 </html>
